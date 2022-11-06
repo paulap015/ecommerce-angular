@@ -12,4 +12,8 @@ export class ProductsService {
   getAllProducts(){
     return this.http.get<Producto[]>('https://fakestoreapi.com/products')
   }
+
+  getSingleProduct(){
+    return this.http.get<Producto>('https://fakestoreapi.com/products/1');
+  }
 }

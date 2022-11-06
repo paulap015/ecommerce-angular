@@ -8,6 +8,7 @@ import { Component, OnInit ,Input,Output, EventEmitter, OnChanges, SimpleChanges
 export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   img: string =''; //se utilzia en el padre
+  size:string='100px';
   @Input('img')
   set changeImg(newImg: string){
     this.img=newImg;

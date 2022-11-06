@@ -13,6 +13,13 @@ export class ProductoComponent implements OnInit {
     this.addedProduct.emit(this.product);
   }
 
+  @Output()showProduct = new EventEmitter<Producto>();
+  activeShow=false;
+  onShowProduct(){
+    this.showProduct.emit(this.product);
+    this.activeShow= !this.activeShow;
+  }
+
   constructor() { }
 
   ngOnInit(): void {

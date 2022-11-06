@@ -11,6 +11,14 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductsComponent implements OnInit {
   myShoppingCart: Producto[]=[];
   products : Producto[] = [];
+  producto:Producto={
+    id: '',
+    title: '',
+    price: 0,
+    image: '',
+    description: '',
+    category: ''
+  };
   // para usar el servicio dentro del componente
   //hacemos inyeccion de dependenicas
   constructor(private storeService:StoreService, private productService:ProductsService) {
@@ -30,6 +38,12 @@ export class ProductsComponent implements OnInit {
     this.total=this.storeService.getTotal();
     // this.myShoppingCart.push(product);
     // this.total=this.myShoppingCart.reduce((sum,item)=>sum+item.price,0);
+  }
+  onShowProduct(product: Producto){
+    console.log('mostrando producto')
+    this.productService.getSingleProduct().subscribe(data=>{
+      this.producto=data;
+    });
   }
 
 

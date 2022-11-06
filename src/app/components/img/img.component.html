@@ -2,7 +2,7 @@
 <h1>{{img}} </h1> -->
 <!-- <p>{{fraseHijo}}</p> -->
 <!-- Fuiste creado para renderizar una imagen -->
-<img (load)="imgLoaded()" (error)="imgError()" [src]="img" *ngIf="img ;else elseImg">
+<img (load)="imgLoaded()" (error)="imgError()" [src]="img" *ngIf="img ;else elseImg" >
 <ng-template #elseImg>
   <img [src]="imgDefault" alt="" >
 </ng-template>
