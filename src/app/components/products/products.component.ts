@@ -19,6 +19,8 @@ export class ProductsComponent implements OnInit {
     description: '',
     category: ''
   };
+  today:Date=new Date();
+  date:Date=new Date(2021,5,10);
   // para usar el servicio dentro del componente
   //hacemos inyeccion de dependenicas
   constructor(private storeService:StoreService, private productService:ProductsService) {

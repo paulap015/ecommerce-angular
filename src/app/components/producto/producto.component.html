@@ -1,7 +1,7 @@
 <!-- <img [src]="product.image" alt="" width="200px" > -->
 <app-img [img]="product.image"></app-img>
 <h2>${{product.price}}</h2>
-<p>{{product.title}} </p>
+<p>{{product.title | reverse}} </p>
 <button (click)="onAddCart()">Add cart</button>
 <button (click)="onShowProduct()">Show product</button>
 <div class="show" [class.active]= "activeShow">
