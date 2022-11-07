@@ -1,10 +1,14 @@
+export interface Category{
+  id: string;
+  name: string;
+}
 export interface Producto
 {
   // Atributos que deberia tener un obj no es una class
-  id:string;
+  id: string;
   title: string;
   price: number;
-  image: string;
-  description:string;
-  category:string;
+  images: string[];
+  description: string;
+  category: Category;
 }

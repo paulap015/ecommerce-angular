@@ -7,7 +7,20 @@ import {Producto} from '../../models/producto.model'
 })
 export class ProductoComponent implements OnInit {
 
-  @Input('product') product!: Producto;
+  // @Input('product') product!: Producto;
+
+  @Input('product') product: Producto = {
+    id:'',
+    price:0,
+    images: [],
+    title:'',
+    category:{
+      id:'',
+      name:''
+    },
+    description:''
+  };
+
   @Output()addedProduct = new EventEmitter<Producto>(); // enviando un obj completo
   onAddCart(){
     this.addedProduct.emit(this.product);

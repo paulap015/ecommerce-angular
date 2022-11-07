@@ -11,14 +11,14 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductsComponent implements OnInit {
   myShoppingCart: Producto[]=[];
   products : Producto[] = [];
-  producto:Producto={
-    id: '',
-    title: '',
-    price: 0,
-    image: '',
-    description: '',
-    category: ''
-  };
+  // producto:Producto={
+  //   id: '',
+  //   title: '',
+  //   price: 0,
+  //   image: '',
+  //   description: '',
+  //   category: ''
+  // };
   today:Date=new Date();
   date:Date=new Date(2021,5,10);
   // para usar el servicio dentro del componente
@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // se debe correr el subscribe
     this.productService.getAllProducts()
     .subscribe(data=> {
       this.products=data;
@@ -41,12 +42,13 @@ export class ProductsComponent implements OnInit {
     // this.myShoppingCart.push(product);
     // this.total=this.myShoppingCart.reduce((sum,item)=>sum+item.price,0);
   }
-  onShowProduct(product: Producto){
-    console.log('mostrando producto')
-    this.productService.getSingleProduct().subscribe(data=>{
-      this.producto=data;
-    });
-  }
+  // Mostrar un producto mas grandesito
+  // onShowProduct(product: Producto){
+  //   console.log('mostrando producto')
+  //   this.productService.getSingleProduct().subscribe(data=>{
+  //     this.producto=data;
+  //   });
+  // }
 
 
 }

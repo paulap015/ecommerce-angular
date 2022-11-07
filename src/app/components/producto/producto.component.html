@@ -1,14 +1,15 @@
-<!-- <img [src]="product.image" alt="" width="200px" > -->
-<app-img [img]="product.image"></app-img>
+<app-img *ngIf="product.images" [img]="product.images[0]"></app-img>
 <h2>${{product.price}}</h2>
-<p>{{product.title | reverse}} </p>
+<p>{{product.title }} </p>
 <button (click)="onAddCart()">Add cart</button>
-<button (click)="onShowProduct()">Show product</button>
-<div class="show" [class.active]= "activeShow">
+
+<!-- <button (click)="onShowProduct()">Show product</button> -->
+<!-- Mostrar un producto  -->
+<!-- <div class="show" [class.active]= "activeShow">
   <app-img [img]="product.image"></app-img>
   <h2>${{product.price}}</h2>
   <p>{{product.title}} </p>
   <p>{{product.category}} </p>
   <p>{{product.id}} </p>
   <p>{{product.description}} </p>
-</div>
+</div> -->
