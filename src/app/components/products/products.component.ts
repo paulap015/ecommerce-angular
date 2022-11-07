@@ -3,6 +3,8 @@ import{Producto} from '../../models/producto.model';
 
 import {StoreService} from '../../services/store.service'
 import { ProductsService } from 'src/app/services/products.service';
+
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -13,6 +15,7 @@ export class ProductsComponent implements OnInit {
   products : Producto[] = [];
   total:number=0;
   showProductDetail:boolean= false;
+  productChosen!: Producto; // el producto seleccionado para ver detalles
 
   // para usar el servicio dentro del componente
   //hacemos inyeccion de dependenicas
@@ -42,7 +45,8 @@ export class ProductsComponent implements OnInit {
     console.log('id',id);
     this.productService.getProduct(id)
     .subscribe(data=> {
-      console.log('product data ',data);
+      this.toggleProductDetail();
+      this.productChosen=data;
     })
   }
 
