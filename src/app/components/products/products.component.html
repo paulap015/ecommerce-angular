@@ -1,8 +1,15 @@
 <!-- Renderizar los productos -->
+<button (click)="toggleProductDetail()">Click</button>
 <div class="products--grid">
   <app-producto
   [product]="product"
   *ngFor="let product of products"
   (addedProduct)="onAddShoppingCart($event)"
+  (showProduct)="onShowDetail( $event )"
   ></app-producto>
+</div>
+<div class="product-detail" [class.active]="showProductDetail">
+  <div>
+    <button (click)="toggleProductDetail()"> Close </button>
+  </div>
 </div>
