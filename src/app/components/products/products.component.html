@@ -1,4 +1,26 @@
 <!-- Renderizar los productos -->
-<div class ="products--grid">
-  <app-producto [product] ="product" *ngFor="let product of products"></app-producto>
+<p>Cantidad {{myShoppingCart.length}} </p>
+<p>Total : ${{total}} </p>
+
+<p>
+  Today: {{today| date:'short'}}
+</p>
+<p>
+  Today: {{today| timeAgo}}
+</p>
+<p>
+  Otra fecha: {{date | date: 'yyyy--dd--MM'}}
+</p>
+<p>
+  Otra fecha: {{date | timeAgo}}
+</p>
+<div class="products--grid">
+  <app-producto
+  [product]="product"
+  *ngFor="let product of products"
+  (addedProduct)="onAddShoppingCart($event)"
+  (showProduct)="onShowProduct($event)"
+  >
+
+  </app-producto>
 </div>
