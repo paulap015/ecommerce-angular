@@ -13,12 +13,13 @@ export class ProductsService {
   getAllProducts(){
     return this.http.get<Producto[]>(this.apiUrl);
   }
+  getProduct(id:string){
+    return this.http.get<Producto>(`${this.apiUrl}/${id}`);
+  }
 
   getSingleProduct(){
     return this.http.get<Producto>('https://fakestoreapi.com/products/1');
   }
 
-  getProduct(id:string){
-    return this.http.get<Producto>(`${this.apiUrl}/${id}`);
-  }
+
 }
