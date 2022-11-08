@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'; //servicio de angular para hacer requests
-import{Producto} from '../models/producto.model';
+import{Producto,ProductDTO, UpdateProductDTO} from '../models/producto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,12 @@ export class ProductsService {
     return this.http.get<Producto>('https://fakestoreapi.com/products/1');
   }
 
+  // Crear producto
+  create(data: ProductDTO){
+    return this.http.post<Producto>(this.apiUrl , data);
 
+  }
+  update(dto: UpdateProductDTO, id:string){
+    return this.http.put<Producto>(`${this.apiUrl}/${id}`,dto);
+  }
 }

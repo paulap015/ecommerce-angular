@@ -1,5 +1,6 @@
 <!-- Renderizar los productos -->
-<button (click)="toggleProductDetail()">Click</button>
+
+<button (click)="createNewProduct()">Create</button>
 <div class="products--grid">
   <app-producto
   [product]="product"
@@ -22,7 +23,7 @@
 
       </swiper>
     </div>
-
     <p>{{productChosen.description}} </p>
+    <button (click)="updateProduct()" >Editar</button>
   </div>
 </div>

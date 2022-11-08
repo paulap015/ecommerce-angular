@@ -1,3 +1,5 @@
+import { Product } from "../product.model";
+
 export interface Category{
   id: string;
   name: string;
@@ -11,4 +13,12 @@ export interface Producto
   images: string[];
   description: string;
   category: Category;
+}
+export interface ProductDTO extends Omit<Producto,'id'|'category'>
+{
+  categoryId: number;
+}
+
+export interface UpdateProductDTO extends Partial<ProductDTO>{
+  
 }

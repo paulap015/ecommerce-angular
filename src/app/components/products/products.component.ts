@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{Producto} from '../../models/producto.model';
+import{ProductDTO,Producto,UpdateProductDTO} from '../../models/producto.model';
 
 import {StoreService} from '../../services/store.service'
 import { ProductsService } from 'src/app/services/products.service';
@@ -50,5 +50,35 @@ export class ProductsComponent implements OnInit {
     })
   }
 
+  createNewProduct(){
+    const producto:ProductDTO={
+      categoryId: 4,
+      title: 'new Toy',
+      price: 200,
+      images: ['https://placeimg.com/640/480/any?random=${Math.random()}',
+               'https://placeimg.com/640/480/any?random=${Math.random()}',
+               'https://placeimg.com/640/480/any?random=${Math.random()}'],
+      description: 'Es un nuevo producto claro que si '
+    }
+    this.productService.create(producto)
+    .subscribe(data=> {
+      console.log('created',data);
+      this.products.unshift(data);
+    }) ;
+  }
+
+
+  updateProduct(){
+    const changes : UpdateProductDTO={
+      title:'Nuevo titulo maravilloso',
+    }
+    const id = this.productChosen.id;
+    this.productService.update(changes, id)
+    .subscribe( data  => {
+      const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
+      this.products[productIndex] = data;
+      this.productChosen=data;
+    });
+  }
 
 }
