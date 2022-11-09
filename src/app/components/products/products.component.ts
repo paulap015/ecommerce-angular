@@ -16,7 +16,8 @@ export class ProductsComponent implements OnInit {
   total:number=0;
   showProductDetail:boolean= false;
   productChosen!: Producto; // el producto seleccionado para ver detalles
-
+  limit=10;
+  offset=0;
   // para usar el servicio dentro del componente
   //hacemos inyeccion de dependenicas
   constructor(private storeService:StoreService, private productService:ProductsService) {
@@ -25,9 +26,16 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     // se debe correr el subscribe
-    this.productService.getAllProducts()
+    this.productService.getProductsByPage(this.limit,this.offset)
     .subscribe(data=> {
       this.products=data;
+    });
+  }
+  loadMore(){
+    this.productService.getProductsByPage(this.limit,this.offset)
+    .subscribe(data=> {
+      this.products=this.products.concat(data);
+      this.offset+=this.limit;
     });
   }
 
