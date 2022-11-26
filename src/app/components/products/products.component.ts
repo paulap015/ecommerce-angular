@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ProductDTO,Producto,UpdateProductDTO} from '../../models/producto.model';
-
+import { zip } from 'rxjs';
+import {switchMap} from 'rxjs/operators'
 import {StoreService} from '../../services/store.service'
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -18,6 +19,7 @@ export class ProductsComponent implements OnInit {
   productChosen!: Producto; // el producto seleccionado para ver detalles
   limit=10;
   offset=0;
+  statusDetail:'loading' |'success'  | 'error'|'init' ='init';
   // para usar el servicio dentro del componente
   //hacemos inyeccion de dependenicas
   constructor(private storeService:StoreService, private productService:ProductsService) {
@@ -26,9 +28,11 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     // se debe correr el subscribe
-    this.productService.getProductsByPage(this.limit,this.offset)
+    //this.productService.getProductsByPage(this.limit,this.offset)
+    this.productService.getAllProducts(this.limit,this.offset)
     .subscribe(data=> {
       this.products=data;
+      //this.offset += this.limit;
     });
   }
   loadMore(){
@@ -51,12 +55,34 @@ export class ProductsComponent implements OnInit {
   }
   onShowDetail(id:string){
     console.log('id',id);
+    this.statusDetail='loading';
+    this.toggleProductDetail();
     this.productService.getProduct(id)
     .subscribe(data=> {
-      this.toggleProductDetail();
       this.productChosen=data;
+      this.statusDetail='success';
+    },errorMessage => {
+      window.alert(errorMessage);
+      this.statusDetail='error';
     })
   }
+
+  readAndUpdate(id:string){
+    this.productService.getProduct(id)
+    .pipe(
+      switchMap((product)=> this.productService.update({title:'change'},product.id)
+      )
+    )
+    .subscribe(data => {
+      console.log(data);
+    });
+    this.productService.fetchReadAndUpdate(id, {title:'change'})
+    .subscribe(response => {
+      const read = response[0];
+      const update = response[1];
+    });
+  }
+
 
   createNewProduct(){
     const producto:ProductDTO={

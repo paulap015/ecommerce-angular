@@ -13,6 +13,7 @@ export interface Producto
   images: string[];
   description: string;
   category: Category;
+  taxes?:number;
 }
 export interface ProductDTO extends Omit<Producto,'id'|'category'>
 {
@@ -20,5 +21,5 @@ export interface ProductDTO extends Omit<Producto,'id'|'category'>
 }
 
 export interface UpdateProductDTO extends Partial<ProductDTO>{
-  
+
 }

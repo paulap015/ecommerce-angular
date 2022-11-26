@@ -1,6 +1,8 @@
 <!-- Renderizar los productos -->
 
 <button (click)="createNewProduct()">Create</button>
+<button (click)="onShowDetail('12000')">detalle not found</button>
+
 <div class="products--grid">
   <app-producto
   [product]="product"
@@ -11,6 +13,8 @@
   <button (click)="loadMore()">Load More products</button>
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
+
+  <h1> {{statusDetail}} </h1>
   <div *ngIf="productChosen" >
     <button (click)="toggleProductDetail()"> Close </button>
     <h1>{{productChosen.title}}}</h1>
