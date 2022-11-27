@@ -3,7 +3,7 @@ import {Product} from './product.model';
 import {Producto} from './models/producto.model'
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
-
+import { FilesService } from './services/files.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +14,29 @@ export class AppComponent {
   frasePadre:string='being part of something special makes you special';
   showImg=true;
   token:string ='';
-  constructor( private authService:AuthService, private userService:UsersService){
+  imgRta= '';
+  constructor(
+    private authService:AuthService,
+    private userService:UsersService,
+    private fileService:FilesService
+    ){
+
+  }
+  downloadPDF(){
+    this.fileService.getFile(
+      'Mypdf.pdf','https://young-sands-07814.herokuapp.com/api/files/dummy.pdf','application/pdf'
+      )
+    .subscribe()
+  }
+  onUpload(event:Event){
+    const element = event.target as HTMLInputElement;
+    const file = element.files?.item(0);
+    if(file){
+      this.fileService.uploadFile(file)
+      .subscribe(rta => {
+        this.imgRta=rta.location;
+      })
+    }
 
   }
 
@@ -98,4 +120,5 @@ export class AppComponent {
     this.inLogin=false;
   }
   widthImg =10;
+
 }
