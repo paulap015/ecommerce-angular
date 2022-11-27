@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {Product} from './product.model';
 import {Producto} from './models/producto.model'
+import { AuthService } from './services/auth.service';
+import { UsersService } from './services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,11 @@ export class AppComponent {
   imgParent : string = 'https://www.w3schools.com/howto/img_avatar.png';
   frasePadre:string='being part of something special makes you special';
   showImg=true;
+  token:string ='';
+  constructor( private authService:AuthService, private userService:UsersService){
+
+  }
+
   public onLoaded(img : string){
     console.log('log padre ', img)
   }
@@ -18,6 +25,14 @@ export class AppComponent {
   public toggleImg(){
     this.showImg=!this.showImg;
   }
+
+  createUser(){
+    this.userService.create({name:'Pau',email:'pau@mail.com',password:'123'})
+    .subscribe(rta=> {
+      console.log(rta);
+    });
+  }
+
   // ------------------Fundamentos abajo
   title = 'commerceVirtual';
   inRegister=false;
@@ -29,10 +44,7 @@ export class AppComponent {
     email:'',
     password:''
   }
-  login={
-    email:'',
-    password:''
-  }
+
   haEntrado=false;
   products: Product[] = [
     {
@@ -74,7 +86,7 @@ export class AppComponent {
     this.inRegister=true;
   }
   public onLogin(){
-    console.log(this.login);
+    // console.log(this.login);
     this.inRegister=false;
     this.inProducts=false;
     this.inLogin=true;
